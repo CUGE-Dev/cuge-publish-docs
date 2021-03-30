@@ -45,4 +45,4 @@ docsify serve .
 
 ## 6. 发布
 
-推送工作分支，稍等片刻，刷新地址，预览发布到托管平台的文档是否正常。
+推送工作分支，稍等片刻，刷新地址 https://github.com/CUGE-Dev/cuge-publish-docs ，预览发布到托管平台的文档是否正常。
