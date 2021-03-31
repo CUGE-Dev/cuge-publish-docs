@@ -239,6 +239,45 @@ elasticsearch.host=
 elasticsearch.port=
 ```
 
+### 配置端SDK签名Secret
+
+```properties
+sdk.secure.android.secret=
+sdk.secure.web.secret=
+sdk.secure.key.storage.path=${user.home}/cuge/keys # 默认业务线密钥存储路径。一般不需要修改
+sdk.secure.expire=172800
+```
+
+### 配置Eureka地址
+
+CUGE 通过Eureka实现集群服务发现及对等机器注册。请将以下两个地址配置成**CUGE集群内其他机器可以互通互访的地址**。
+
+```properties
+# Instance name (related to crowd location)
+eureka.client.serviceUrl.ugeZone=http://localhost:10010/eureka/
+eureka.client.serviceUrl.defaultZone=http://localhost:10010/eureka/
+```
+
+### （可选）配置人群文件及物料文件存储路径
+
+一般不需要改动。不过如果您的主程序处于容器中，请将这些路径显式设置为能够持久化到物理设备上的挂载路径，否则可能出现容器重启后人群文件丢失的问题。
+
+```properties
+# Crowd files
+crowd.bitmaskfile.path=${user.home}/cuge/crowd/bitmask
+crowd.material.path=${user.home}/cuge/crowd/material
+```
+
+### （可选）配置比特位人群是否进行压缩
+
+开启比特位人群压缩能够大幅降低稠密人群的文件大小，但是会延长人群创建的时间。
+
+如果您的业务规模其实不是很大，或者您的人群一般比较稀疏，不需要打开此选项。
+
+```properties
+crowd.bitmask.compact=false
+```
+
 ### 配置内部RPC调用鉴权Secret
 
 CUGE 会在需要访问集群内的其他实例时，向其发出RPC调用。为了避免未经授权的用户随便对CUGE集群中的机器发起RPC调用，您需要设置并保管好调用认证Secret。另外需要注意的是，CUGE集群内的所有机器均需要保持RPC Secret一致，否则将无法完成RPC调用。
@@ -278,4 +317,13 @@ RUN ls -l /etc/localtime
 CMD ["java","-Xmx2g","-XX:+UseG1GC","-XX:+UseCompressedOops","-server","-XX:InitiatingHeapOccupancyPercent=70","-Duser.timezone=Asia/Shanghai","-Dproject.name=UserGrowingEngine","-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8099","-jar","user-growing-engine-start-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=环境名"]
 ```
 
-最后，在确保存储服务(MySQL, Redis, Etcd)及日志采集服务(Filebeats, Logstash, Elasticsearch)都正常运行后，可以启动CUGE，查看启动日志是否正常，然后再测试相关功能是否可用。
+最后，在确保存储服务(MySQL, Redis, Etcd)及日志采集服务(Filebeats, Logstash, Elasticsearch)都正常运行后，可以启动CUGE。
+
+参考启动命令如下。
+
+```shell
+docker run --rm -it -d -p 10010:10010 -p 8099:8099 -v /path/to/cuge:/root/cuge -v /path/to/cuge/logs:/root/logs --name cuge -h 唯一标识当前实例的名称 --network cuge-network cuge:deploy
+```
+
+查看启动日志是否正常，然后再测试相关功能是否可用。
+
