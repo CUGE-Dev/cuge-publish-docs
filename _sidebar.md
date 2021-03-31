@@ -1,7 +1,7 @@
 - Notification
   - [文档编写规范](./workflow.md)
 - 服务端
-  - [Quick Start](./server/quick-start.md)
+  - [环境部署](./server/deploy.md)
 - 客户端
   - [Quick Start](./client/quick-start.md)
 - 管理后台
