@@ -57,8 +57,6 @@ networks:
 
 对于ETCD，您还需要进入etcdctl V3 API，添加一个账户并打开鉴权。有关更多的信息，请参考 [etcd docs](https://etcd.io/docs/v3.4/op-guide/authentication/)。
 
-完成存储实例部署后，请打开CUGE配置文件`application-sample.properties`，分别找到Database, Redis和ETCD的配置文件，修改其中的实例链接指向刚刚部署好的实例的链接，同时将密码修改为您创建实例时指定的用户名和密码。
-
 ## 埋点采集环境部署
 
 CUGE 埋点采集环境使用了FileBeats，Logstash及Elasticsearch三件套，埋点可视化环境使用了Kibana。您可以参考以下配置文件启动Elasticsearch及Kibana。
