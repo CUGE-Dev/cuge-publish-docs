@@ -2,6 +2,7 @@
   - [文档编写规范](./workflow.md)
 - 服务端
   - [环境部署](./server/deploy.md)
+  - [业务接入指南](./server/biz-intergration.md)
 - 客户端
   - [Quick Start](./client/quick-start.md)
 - 管理后台
