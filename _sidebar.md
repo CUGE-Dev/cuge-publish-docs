@@ -4,6 +4,7 @@
   - [环境部署](./server/deploy.md)
   - [业务接入指南](./server/biz-intergration.md)
 - 客户端
-  - [Quick Start](./client/quick-start.md)
+  - [业务接入指南](./client/client.md)
+  - [埋点说明文档](./client/tracker.md)
 - 管理后台
   - [Quick Start](./management/quick-start.md)
