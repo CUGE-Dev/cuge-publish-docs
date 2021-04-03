@@ -8,6 +8,8 @@
 
 ## 存储依赖部署
 
+### 启动存储服务
+
 CUGE 的存储依赖有 MySQL, Redis和ETCD。您可以参考以下的docker compose文件写法来部署。需要注意的是，以下配置文件意在 展示CUGE对数据存储实例的运行参数要求，通过此配置文件启动的存储服务，都运行在单机模式，不适合生产环境使用。生产环境请联系运维为其分配有主从节点互备的实例。
 
 **注意修改密码以及挂载点的物理路径。**
@@ -295,7 +297,19 @@ rpc.secret=
  mvn package -Dmaven.test.skip=true -DskipTests
 ```
 
-生成构建产物`user-growing-engine-start-0.0.1-SNAPSHOT.jar`。然后打Docker镜像。
+生成构建产物`user-growing-engine-start-0.0.1-SNAPSHOT.jar`。
+
+第一次运行，需要初始化数据库表结构以及创建超级管理员账户，需要带参数运行，如下所示
+
+```shell
+java -jar user-growing-engine-start-0.0.1-SNAPSHOT.jar --initdb true --initAdmin true --email admin@example.com --password your-admin-password
+```
+
+携带初始化参数后，程序将自动从OSS拉取建表DDL，初始化数据库表结构，同时创建一个通过参数指定的邮箱及密码登录的超级管理员账号。
+
+> 请不要在生产环境中加初始化参数，这会导致每次启动应用，都走一遍初始化流程，存在破坏表结构，丢失数据的风险！
+
+当数据库结构以及超级管理员用户创建完成后，可以开始打Docker镜像。
 
 镜像配置可以参考以下Dockerfile。
 
