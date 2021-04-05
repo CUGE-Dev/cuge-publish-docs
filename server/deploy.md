@@ -302,7 +302,7 @@ rpc.secret=
 第一次运行，需要初始化数据库表结构以及创建超级管理员账户，需要带参数运行，如下所示
 
 ```shell
-java -jar user-growing-engine-start-0.0.1-SNAPSHOT.jar --initdb true --initAdmin true --email admin@example.com --password your-admin-password
+java -jar user-growing-engine-start-0.0.1-SNAPSHOT.jar --database --admin --email admin@example.com --password your-admin-password
 ```
 
 携带初始化参数后，程序将自动从OSS拉取建表DDL，初始化数据库表结构，同时创建一个通过参数指定的邮箱及密码登录的超级管理员账号。
