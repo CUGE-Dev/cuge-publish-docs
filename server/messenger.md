@@ -9,12 +9,12 @@
 * 设置服务器连接地址 (一般来说只要改IP和端口即可，ws前缀不用动)
 * 如果需要，勾选断线自动重连。
 
-![setting](messenger.assets/setting.png)
+<img src="messenger.assets/setting.png" alt="setting" style="zoom:50%;" />
 
 * 点击右上角纸飞机图标启动 (或者停止) 服务
 
-![main](messenger.assets/main.png)
+<img src="messenger.assets/main.png" alt="main" style="zoom:50%;" />
 
 此时任务栏也会显示一个正在后台运行的通知。
 
-![taskbar](messenger.assets/taskbar.png)
+<img src="messenger.assets/taskbar.png" alt="taskbar" style="zoom:50%;" />
