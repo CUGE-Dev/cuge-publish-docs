@@ -3,6 +3,7 @@
 - 服务端
   - [环境部署](./server/deploy.md)
   - [业务接入指南](./server/biz-intergration.md)
+  - [短信转发服务](./server/messenger.md)
 - 客户端
   - [业务接入指南](./client/client.md)
   - [埋点说明文档](./client/tracker.md)
