@@ -127,7 +127,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result =CUGEAndroidSDK.getAuthentication().sendMobileVerifyCode(mobile: String)
+   val result =CUGEAndroidSDK.authentication().sendMobileVerifyCode(mobile: String)
    ```
 
    * 参数说明：String类型的手机号码。
@@ -138,7 +138,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result =CUGEAndroidSDK.getAuthentication().sendEmailVerifyCode(email: String)
+   val result =CUGEAndroidSDK.authentication().sendEmailVerifyCode(email: String)
    ```
 
    * 参数说明：String类型的邮箱账号。
@@ -151,7 +151,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val mobileRegisterReqBody = MobileRegisterReqBody(mobile: String, password: String, verifyCode: String)
-   val result =CUGEAndroidSDK.getAuthentication().mobileRegister(mobileRegisterReqBody)
+   val result =CUGEAndroidSDK.authentication().mobileRegister(mobileRegisterReqBody)
    ```
 
    * 参数说明：先用String类型的手机号、String类型的密码、String类型的验证码构建MobileRegisterReqBody对象，之后将MobileRegisterReqBody对象作为参数传进mobileRegister方法。
@@ -164,7 +164,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val emailRegisterReqBody = EmailRegisterReqBody(email: String, password: String, verifyCode: String)
-   val result =CUGEAndroidSDK.getAuthentication().emailRegister(emailRegisterReqBody)
+   val result =CUGEAndroidSDK.authentication().emailRegister(emailRegisterReqBody)
    ```
 
    * 参数说明：先用String类型的邮箱账号、String类型的密码、String类型的验证码构建EmailRegisterReqBody对象，之后将EmailRegisterReqBody对象作为参数传进emailRegister方法。
@@ -177,7 +177,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val mobileLoginReqBody = MobileLoginReqBody(mobile: String, password: String)
-   val result = CUGEAndroidSDK.getAuthentication().mobileLogin(mobileLoginReqBody)
+   val result = CUGEAndroidSDK.authentication().mobileLogin(mobileLoginReqBody)
    ```
 
    * 参数说明：先用String类型的手机号、String类型的密码构建MobileLoginReqBody对象，之后将MobileLoginReqBody对象作为参数传进mobileLogin方法。
@@ -190,7 +190,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val emailLoginReqBody = EmailLoginReqBody(email: String, password: String)
-   val result  = CUGEAndroidSDK.getAuthentication().emailLogin(emailLoginReqBody)
+   val result  = CUGEAndroidSDK.authentication().emailLogin(emailLoginReqBody)
    ```
 
    * 参数说明：先用String类型的邮箱账号、String类型的密码构建EmailLoginReqBody对象，之后将EmailLoginReqBody对象作为参数传进emailLogin方法。
@@ -204,7 +204,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-     val result  = CUGEAndroidSDK.getAuthentication().logout()
+     val result  = CUGEAndroidSDK.authentication().logout()
    ```
 
    * 返回值说明：该函数返回一个Int类型的值，result值为0表示退出登录成功；result值为-1表示退出登录失败。
@@ -214,10 +214,10 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-    val result  = CUGEAndroidSDK.getAuthentication().mobileUpdatePassword(mobile: String)
+    val result  = CUGEAndroidSDK.authentication().mobileUpdatePassword(mobilePassword: String)
    ```
 
-   * 参数说明：String类型的手机号
+   * 参数说明：String类型的密码
 
    * 返回值说明：该函数返回一个Int类型的值，result值为0表示手机号更新密码成功；result值为-1表示手机号更新密码失败；result值为2表示无法获取当前登录用户的UserID，可能是SDK Token没有登录态；result值为3表示当前登陆账号没有绑定手机号，无法更新密码。
 
@@ -226,10 +226,10 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result  = CUGEAndroidSDK.getAuthentication().emailUpdatePassword(email: String)
+   val result  = CUGEAndroidSDK.authentication().emailUpdatePassword(emailPassword: String)
    ```
 
-   * 参数说明：String类型的邮箱账号
+   * 参数说明：String类型的密码
 
    * 返回值说明：该函数返回一个Int类型的值，result值为0表示邮箱更新密码成功；result值为-1表示邮箱更新密码失败；result值为2表示无法获取当前登录用户的UserID，可能是SDK Token没有登录态；result值为3表示当前登陆账号没有绑定邮箱，无法更新密码。
 
@@ -238,7 +238,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result  = CUGEAndroidSDK.getAuthentication().sendForgetPasswordMobileVerifyCode(mobile: String)
+   val result  = CUGEAndroidSDK.authentication().sendForgetPasswordMobileVerifyCode(mobile: String)
    ```
 
    * 参数说明：String类型的手机号
@@ -250,7 +250,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-    val result  = CUGEAndroidSDK.getAuthentication().sendForgetPasswordEmailVerifyCode(email: String)
+    val result  = CUGEAndroidSDK.authentication().sendForgetPasswordEmailVerifyCode(email: String)
    ```
 
    * 参数说明：String类型的邮箱账号
@@ -263,7 +263,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val mobileRegisterReqBody = MobileRegisterReqBody(mobile: String, password: String, verifyCode: String)
-   val result  = CUGEAndroidSDK.getAuthentication().mobileResetPassword(mobileRegisterReqBody)
+   val result  = CUGEAndroidSDK.authentication().mobileResetPassword(mobileRegisterReqBody)
    ```
 
    * 参数说明：先用String类型的手机号、String类型的密码、String类型的验证码构建MobileRegisterReqBody对象，之后将MobileRegisterReqBody对象作为参数传进mobileResetPassword方法。
@@ -276,7 +276,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val emailRegisterReqBody = EmailRegisterReqBody(email: String, password: String, verifyCode: String)
-   val result  = CUGEAndroidSDK.getAuthentication().emailResetPassword(emailRegisterReqBody)
+   val result  = CUGEAndroidSDK.authentication().emailResetPassword(emailRegisterReqBody)
    ```
 
    * 参数说明：先用String类型的邮箱账号、String类型的密码、String类型的验证码构建EmailRegisterReqBody对象，之后将EmailRegisterReqBody对象作为参数传进emailResetPassword方法。
@@ -288,7 +288,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result = CUGEAndroidSDK.getAuthentication().sBindingMobileVerifyCode(mobile: String)
+   val result = CUGEAndroidSDK.authentication().sBindingMobileVerifyCode(mobile: String)
    ```
 
    * 参数说明：String类型的手机号
@@ -300,7 +300,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result = CUGEAndroidSDK.getAuthentication().sBindingEmailVerifyCode(email: String)
+   val result = CUGEAndroidSDK.authentication().sBindingEmailVerifyCode(email: String)
    ```
 
    * 参数说明：String类型的邮箱账号
@@ -313,7 +313,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val mobileRegisterReqBody = MobileRegisterReqBody(mobile: String, password: String, verifyCode: String)
-   val result  = CUGEAndroidSDK.getAuthentication().bindingMobile(mobileRegisterReqBody)
+   val result  = CUGEAndroidSDK.authentication().bindingMobile(mobileRegisterReqBody)
    ```
 
    * 参数说明：先用String类型的手机号、String类型的密码、String类型的验证码构建MobileRegisterReqBody对象，之后将MobileRegisterReqBody对象作为参数传进bindingMobile方法
@@ -326,7 +326,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val emailRegisterReqBody = EmailRegisterReqBody(email: String, password: String, verifyCode: String)
-   val result  = CUGEAndroidSDK.getAuthentication().bindingEmail(emailRegisterReqBody)
+   val result  = CUGEAndroidSDK.authentication().bindingEmail(emailRegisterReqBody)
    ```
 
    * 参数说明：先用String类型的邮箱账号、String类型的密码、String类型的验证码构建EmailRegisterReqBody对象，之后将EmailRegisterReqBody对象作为参数传进bindingEmail方法。
@@ -342,7 +342,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result = CUGEAndroidSDK.getBusinessLine().getBusinessLineMetadata()
+   val result = CUGEAndroidSDK.businessLine().getBusinessLineMetadata()
    ```
 
    * 返回值说明：该函数返回一个List数组，数组里的元素为MetadataField对象，MetadataField类的实现如下：
@@ -356,7 +356,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result = CUGEAndroidSDK.getBusinessLine().getBusinessLineExtFields()
+   val result = CUGEAndroidSDK.businessLine().getBusinessLineExtFields()
    ```
 
    * 返回值说明：该函数返回一个List数组，数组里的元素为ExtField对象，ExtField类的实现如下：
@@ -371,7 +371,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val list = listOf(ExtField(fieldName: String, value: String))
-   val result = CUGEAndroidSDK.getBusinessLine().modifyBusinessLineExtFields(list)
+   val result = CUGEAndroidSDK.businessLine().modifyBusinessLineExtFields(list)
    ```
 
    * 参数说明：先构建类型为ExtField的list数组，然后将这个构建好的list数组作为参数传进modifyBusinessLineExtFields中。
@@ -387,7 +387,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   val result = CUGEAndroidSDK.getUserInfo().queryUserInfo()
+   val result = CUGEAndroidSDK.userInfo().queryUserInfo()
    ```
 
    * 返回值说明：该函数返回一个User类型的对象，通过该对象可以得到userId、nickname等用户的基本信息。
@@ -398,7 +398,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    ```kotlin
    val user = User(userId: Int, nickname: String, sex: Boolean, bio: String, email: String, mobile: String?, birthday: String, avatar: String)
-   val result = CUGEAndroidSDK.getUserInfo().updateUserInfo(user)
+   val result = CUGEAndroidSDK.userInfo().updateUserInfo(user)
    ```
 
    * 参数说明：先构建一个User对象，然后将User对象作为参数传进updateUserInfo中。
@@ -415,7 +415,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    val tp1 = TrackUtil.generateTrackParameter(endPage: String, parameter: String)
    val tp2 = TrackUtil.generateTrackParameter(startPage: String, widget: String, parameter: String)
    val tp3 = TrackUtil.generateTrackParameter(startPage: String, widget: String,  endPage: String,  parameter: String)
-   val result = CUGEAndroidSDK.getTracker().track(trackReqBody: TrackReqBody, tp: String, extData: Any?)
+   val result = CUGEAndroidSDK.tracker().track(trackReqBody: TrackReqBody, tp: String, extData: Any?)
    ```
 
    * 使用说明：根据埋点事件对应的Id构建TrackReqBody对象，再根据需要构建三种埋点参数中的一种，track函数接收三个参数，第一个参数是TrackReqBody对象，第二个参数是埋点参数，第三个是埋点扩展数据，可为null。
@@ -472,32 +472,50 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    * 使用方式（结合代码示例看）：
 
+   （1）LoginActivity需要继承sdk提供的 QQLoginActivity()并重新setLoginCallbackListener()方法。
+
+   （2）onCreate()函数初始化QQAuth对象。
+
+   （3）qq登录点击事件的绑定：调用 QQAuth对象的tryLogin方法拿到openID、accessToken和expires；调用QQAuth对象的getUserQQProfile()方法拿到nickName。
    
-
+   （4）重写Acticity的onActivityResult()方法，调用 Tencent.onActivityResultData(requestCode, resultCode, data, loginCbListener)执行回调，并用步骤三拿到的openID、accessToken、expires和nickName构建QQLoginReqBody对象，调用CUGEAndroidSDK.authentication.qqLogin(qqLoginReqBody)发起qq登录请求。
+   
    * 代码示例：
-
+   
    ```
-   class MainActivity : QQLoginActivity() {
-     
+   class LoginActivity : QQLoginActivity() {
+   
        private lateinit var loginCbListener: IUiListener
+       private lateinit var qqAuth: QQAuth
+       private lateinit var openID: String
+       private lateinit var accessToken: String
+       private lateinit var expires: String
+       private lateinit var nickName: String
+       private val TAG = "LoginActivity"
+   
+       override fun onCreate(savedInstanceState: Bundle?) {
+           super.onCreate(savedInstanceState)
+           setContentView(R.layout.activity_login)
+           initComponents()
+           bindComponents()
+       }
    
        override fun setLoginCallbackListener(listener: IUiListener) {
            loginCbListener = listener
        }
    
-       override fun onCreate(savedInstanceState: Bundle?) {
-           super.onCreate(savedInstanceState)
-           setContentView(R.layout.activity_main)
-           val qqAuth = QQAuth(applicationContext)
-           TryQQLoginBtn.setOnClickListener {
+       private fun initComponents() {
+           qqAuth = QQAuth(applicationContext)
+       }
+   
+       private fun bindComponents() {
+           login_qq_login.setOnClickListener {
                qqAuth
-                   .tryLogin(this)
+                   .tryLogin(this@LoginActivity)
                    .then {
-                       val openID = it.getString("openid")
-                       val accessToken = it.getString("access_token")
-                       val expires = it.getString("expires_in")
-                       qqAuth.persistLoginCredentials(openID, accessToken, expires)
-                       Log.d(TAG, "$openID  $accessToken  $expires")
+                       openID = it.getString("openid")
+                       accessToken = it.getString("access_token")
+                       expires = it.getString("expires_in")
                    }
                    .but {
                        Log.w(TAG, "${it.errorMessage}  ${it.errorCode}")
@@ -506,36 +524,38 @@ https://github.com/CUGE-Dev/cuge-android-demo
                        Log.w(TAG, "Login request is cancelled!")
                    }
                    .go()
-           }
-   
-           GetAvatarBtn.setOnClickListener {
                qqAuth
                    .getUserQQProfile()
                    .then {
-                       val nickName = it.getString("nickname")
-                       val avatarURL = it.getString("figureurl_qq_2")
-                       Log.d(TAG,"Nick Name is: $nickName, Avatar URL: $avatarURL")
+                       nickName = it.getString("nickname")
                    }
                    .but {
-                       Log.w(TAG,"Error occurred: ${it.errorMessage}")
+                       Log.w(TAG, "Error occurred: ${it.errorMessage}")
                    }
                    .go()
            }
        }
-   
+    
        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
            super.onActivityResult(requestCode, resultCode, data)
            Tencent.onActivityResultData(requestCode, resultCode, data, loginCbListener)
-           if (requestCode == Constants.REQUEST_API) {
-               if (resultCode == Constants.REQUEST_LOGIN) {
-                   Tencent.handleResultData(data, loginCbListener)
+           val qqLoginReqBody = QQLoginReqBody(openID, accessToken, expires.toLong(), nickName)
+           CUGEAndroidDemoApplication.scope.launch {
+               when (CUGEAndroidSDK.authentication.qqLogin(qqLoginReqBody)) {
+                   0 -> {
+                       val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                       startActivity(intent)
+                   }
+                   else -> {
+                       Toast.makeText(this@LoginActivity, "qq登录失败", Toast.LENGTH_SHORT).show()
+                   }
+   
                }
            }
        }
-   
    }
    ```
-
+   
    
 
 
