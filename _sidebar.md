@@ -7,5 +7,6 @@
 - 客户端
   - [业务接入指南](./client/client.md)
   - [埋点说明文档](./client/tracker.md)
+  - [兼容仍在使用support库的过时应用](./client/support-compatible.md)
 - 管理后台
   - [Quick Start](./management/quick-start.md)
