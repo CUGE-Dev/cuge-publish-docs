@@ -158,9 +158,9 @@ input {
 filter {
     grok {
         match => [
-            "message", "\|%{NUMBER:timestamp}\|###\|%{NUMBER:order}\|###\|(?<deviceId>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:userId}\|###\|(?<bizLine>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:appId}\|###\|(?<sdkVersion>v[0-9]+\.[0-9]+\.[0.9]+)\|###\|%{NUMBER:eventId}\|###\|tp\.(?<param0>[A-Za-z0-9_]{1,}+)\.(?<param1>[A-Za-z0-9_]{1,}+)\.(?<param2>[A-Za-z0-9_]{1,})\.(?<param3>[A-Za-z0-9_+=]{2,})\|###\|(?<extdata>.*)\|",
-            "message", "\|%{NUMBER:timestamp}\|###\|%{NUMBER:order}\|###\|(?<deviceId>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:userId}\|###\|(?<bizLine>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:appId}\|###\|(?<sdkVersion>v[0-9]+\.[0-9]+\.[0.9]+)\|###\|%{NUMBER:eventId}\|###\|tp\.(?<param0>[A-Za-z0-9_]{1,}+)\.(?<param1>[A-Za-z0-9_]{1,}+)\.(?<param2>[A-Za-z0-9_+=]{2,})\|###\|(?<extdata>.*)\|",
-            "message", "\|%{NUMBER:timestamp}\|###\|%{NUMBER:order}\|###\|(?<deviceId>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:userId}\|###\|(?<bizLine>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:appId}\|###\|(?<sdkVersion>v[0-9]+\.[0-9]+\.[0.9]+)\|###\|%{NUMBER:eventId}\|###\|tp\.(?<param0>[A-Za-z0-9_]{1,}+)\.(?<param1>[A-Za-z0-9_+=]{2,})\|###\|(?<extdata>.*)\|"
+            "message", "\|%{NUMBER:timestamp}\|###\|%{NUMBER:order}\|###\|(?<deviceId>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:userId}\|###\|(?<bizLine>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:appId}\|###\|(?<sdkVersion>v[0-9]+\.[0-9]+\.[0.9]+)\|###\|%{NUMBER:eventId}\|###\|tp\.(?<param0>[A-Za-z0-9_+=/]{1,}+)\.(?<param1>[A-Za-z0-9_+=/]{1,}+)\.(?<param2>[A-Za-z0-9_+=/]{1,})\.(?<param3>[A-Za-z0-9_+=/]{2,})\|###\|(?<extdata>.*)\|",
+            "message", "\|%{NUMBER:timestamp}\|###\|%{NUMBER:order}\|###\|(?<deviceId>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:userId}\|###\|(?<bizLine>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:appId}\|###\|(?<sdkVersion>v[0-9]+\.[0-9]+\.[0.9]+)\|###\|%{NUMBER:eventId}\|###\|tp\.(?<param0>[A-Za-z0-9_+=/]{1,}+)\.(?<param1>[A-Za-z0-9_+=/]{1,}+)\.(?<param2>[A-Za-z0-9_+=/]{2,})\|###\|(?<extdata>.*)\|",
+            "message", "\|%{NUMBER:timestamp}\|###\|%{NUMBER:order}\|###\|(?<deviceId>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:userId}\|###\|(?<bizLine>[a-zA-Z0-9._-]+)\|###\|%{NUMBER:appId}\|###\|(?<sdkVersion>v[0-9]+\.[0-9]+\.[0.9]+)\|###\|%{NUMBER:eventId}\|###\|tp\.(?<param0>[A-Za-z0-9_+=/]{1,}+)\.(?<param1>[A-Za-z0-9_+=/]{2,})\|###\|(?<extdata>.*)\|"
         ]
     }
 
@@ -172,7 +172,7 @@ filter {
 
     ruby {
         init => "require 'base64'"
-        code => "event.set('extdata_decoded',Base64.decode64(event.get('extdata'))) if event.include?('extdata')"
+        code => "event.set('extdata_decoded',Base64.decode64(event.get('extdata'))) if event.include?('extdata') ; event.set('param3_decoded',Base64.decode64(event.get('param3'))) if event.include?('param3')"
     }
 }
 
