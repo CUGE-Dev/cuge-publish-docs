@@ -510,29 +510,33 @@ https://github.com/CUGE-Dev/cuge-android-demo
    
        private fun bindComponents() {
            login_qq_login.setOnClickListener {
-               qqAuth
-                   .tryLogin(this@LoginActivity)
-                   .then {
-                       openID = it.getString("openid")
-                       accessToken = it.getString("access_token")
-                       expires = it.getString("expires_in")
-                   }
-                   .but {
-                       Log.w(TAG, "${it.errorMessage}  ${it.errorCode}")
-                   }
-                   .canceled {
-                       Log.w(TAG, "Login request is cancelled!")
-                   }
-                   .go()
-               qqAuth
-                   .getUserQQProfile()
-                   .then {
-                       nickName = it.getString("nickname")
-                   }
-                   .but {
-                       Log.w(TAG, "Error occurred: ${it.errorMessage}")
-                   }
-                   .go()
+               if(!qqAuth.isHaveInstallQQ(CUGEAndroidDemoApplication.context)){
+                   "当前设备未安装QQ，请先安装完再登陆！".showToast()
+               }else{
+                   qqAuth
+                       .tryLogin(this@LoginActivity)
+                       .then {
+                           openID = it.getString("openid")
+                           accessToken = it.getString("access_token")
+                           expires = it.getString("expires_in")
+                       }
+                       .but {
+                           Log.w(TAG, "${it.errorMessage}  ${it.errorCode}")
+                       }
+                       .canceled {
+                           Log.w(TAG, "Login request is cancelled!")
+                       }
+                       .go()
+                   qqAuth
+                       .getUserQQProfile()
+                       .then {
+                           nickName = it.getString("nickname")
+                       }
+                       .but {
+                           Log.w(TAG, "Error occurred: ${it.errorMessage}")
+                       }
+                       .go()
+               }
            }
        }
     
@@ -557,8 +561,3 @@ https://github.com/CUGE-Dev/cuge-android-demo
    ```
    
    
-
-
-
-
-
