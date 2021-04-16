@@ -472,88 +472,62 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    * 使用方式（结合代码示例看）：
 
-   （1）LoginActivity需要继承sdk提供的 QQLoginActivity()并重新setLoginCallbackListener()方法。
+   （1）LoginActivity需要继承sdk提供的 QQLoginActivity()并重写setLoginCallbackListener()方法。
 
    （2）onCreate()函数初始化QQAuth对象。
 
-   （3）qq登录点击事件的绑定：调用 QQAuth对象的tryLogin方法拿到openID、accessToken和expires；调用QQAuth对象的getUserQQProfile()方法拿到nickName。
+   （3）qq登录点击事件的绑定：调用 QQAuth对象的qqAuth.loginQQ(context: QQLoginActivity)方法。
    
-   （4）重写Acticity的onActivityResult()方法，调用 Tencent.onActivityResultData(requestCode, resultCode, data, loginCbListener)执行回调，并用步骤三拿到的openID、accessToken、expires和nickName构建QQLoginReqBody对象，调用CUGEAndroidSDK.authentication.qqLogin(qqLoginReqBody)发起qq登录请求。
+   （4）重写Acticity的onActivityResult()方法，调用 Tencent.onActivityResultData(requestCode, resultCode, data, loginCbListener)执行回调，并调用QQAuth对象的openID、accessToken、expires和nickName构建QQLoginReqBody对象，调用CUGEAndroidSDK.authentication.qqLogin(qqLoginReqBody)发起qq登录请求。
    
    * 代码示例：
    
    ```
    class LoginActivity : QQLoginActivity() {
    
-       private lateinit var loginCbListener: IUiListener
        private lateinit var qqAuth: QQAuth
-       private lateinit var openID: String
-       private lateinit var accessToken: String
-       private lateinit var expires: String
-       private lateinit var nickName: String
-       private val TAG = "LoginActivity"
+       private lateinit var loginCbListener: IUiListener
    
        override fun onCreate(savedInstanceState: Bundle?) {
            super.onCreate(savedInstanceState)
            setContentView(R.layout.activity_login)
-           initComponents()
-           bindComponents()
+           qqAuth = QQAuth(applicationContext)
+           login_qq_login.setOnClickListener {
+               if (!qqAuth.isHaveInstallQQ(CUGEAndroidDemoApplication.context)) {
+                   "当前设备未安装QQ，请先安装完再登陆！".showToast()
+               } else {
+                   qqAuth.loginQQ(this@LoginActivity)
+               }
+           }
        }
    
        override fun setLoginCallbackListener(listener: IUiListener) {
            loginCbListener = listener
        }
    
-       private fun initComponents() {
-           qqAuth = QQAuth(applicationContext)
-       }
-   
-       private fun bindComponents() {
-           login_qq_login.setOnClickListener {
-               if(!qqAuth.isHaveInstallQQ(CUGEAndroidDemoApplication.context)){
-                   "当前设备未安装QQ，请先安装完再登陆！".showToast()
-               }else{
-                   qqAuth
-                       .tryLogin(this@LoginActivity)
-                       .then {
-                           openID = it.getString("openid")
-                           accessToken = it.getString("access_token")
-                           expires = it.getString("expires_in")
-                       }
-                       .but {
-                           Log.w(TAG, "${it.errorMessage}  ${it.errorCode}")
-                       }
-                       .canceled {
-                           Log.w(TAG, "Login request is cancelled!")
-                       }
-                       .go()
-                   qqAuth
-                       .getUserQQProfile()
-                       .then {
-                           nickName = it.getString("nickname")
-                       }
-                       .but {
-                           Log.w(TAG, "Error occurred: ${it.errorMessage}")
-                       }
-                       .go()
-               }
-           }
-       }
-    
        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
            super.onActivityResult(requestCode, resultCode, data)
            Tencent.onActivityResultData(requestCode, resultCode, data, loginCbListener)
-           val qqLoginReqBody = QQLoginReqBody(openID, accessToken, expires.toLong(), nickName)
-           CUGEAndroidDemoApplication.scope.launch {
+           // 注意，涉及到while循环，不要在主线程执行
+           CUGEAndroidDemoApplication.scope.launch(Dispatchers.Default) {
+    		// while循环主要是确保openID、accessToken、expires和nickName不为空
+               while (true) {
+                   if (qqAuth.timer == 1)
+                       break
+               }
+               val qqLoginReqBody = QQLoginReqBody(
+                   qqAuth.openID,
+                   qqAuth.accessToken,
+                   qqAuth.expires.toLong(),
+                   qqAuth.nickName
+               )
                when (CUGEAndroidSDK.authentication.qqLogin(qqLoginReqBody)) {
                    0 -> {
-                       val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                       startActivity(intent)
+                       "qq登录成功".showToast()
                    }
                    else -> {
-                       Toast.makeText(this@LoginActivity, "qq登录失败", Toast.LENGTH_SHORT).show()
+                       "qq登录失败".showToast()
                    }
-   
                }
            }
        }
