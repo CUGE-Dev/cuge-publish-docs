@@ -317,7 +317,6 @@ https://github.com/CUGE-Dev/cuge-android-demo
    ```
 
    * 参数说明：先用String类型的手机号、String类型的密码、String类型的验证码构建MobileRegisterReqBody对象，之后将MobileRegisterReqBody对象作为参数传进bindingMobile方法
-
    * 返回值说明：该函数返回一个Int类型的值，result值为0表示绑定手机成功；result值为-1表示绑定手机失败；result值为3表示验证码错误或UserID不对应。
 
    （18）绑定邮箱
@@ -330,8 +329,19 @@ https://github.com/CUGE-Dev/cuge-android-demo
    ```
 
    * 参数说明：先用String类型的邮箱账号、String类型的密码、String类型的验证码构建EmailRegisterReqBody对象，之后将EmailRegisterReqBody对象作为参数传进bindingEmail方法。
-
    * 返回值说明：该函数返回一个Int类型的值，result值为0表示绑定邮箱成功；result值为-1表示绑定邮箱失败；result值为3表示验证码错误或UserID不对应。
+
+   （19）登录态维持状态下实现自动登录（免登陆）
+
+   * 使用方式：
+
+   ```kotlin
+   if (CommonUtil.getSp(this).getInt("type", -1) != -1 && !CommonUtil.isNeedInitSDK(this)) {
+          startMainActivity()//免登陆直接进入主界面
+    }    
+   ```
+
+   * 使用说明：调用CommonUtil.getSp(context:Context).getInt("type", -1) != -1 && !CommonUtil.isNeedInitSDK(context:Context),若为true，说明登录态存在，可直接免登陆进入主界面。
 
      
 
@@ -472,13 +482,11 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    * 使用方式（结合代码示例看）：
 
-   （1）LoginActivity需要继承sdk提供的 QQLoginActivity()并重写setLoginCallbackListener()方法。
+   （1）LoginActivity需要继承sdk提供的 QQLoginActivity()。
 
    （2）onCreate()函数初始化QQAuth对象。
 
-   （3）qq登录点击事件的绑定：调用 QQAuth对象的qqAuth.loginQQ(context: QQLoginActivity)方法。
-   
-   （4）重写Acticity的onActivityResult()方法，调用 Tencent.onActivityResultData(requestCode, resultCode, data, loginCbListener)执行回调，并调用QQAuth对象的openID、accessToken、expires和nickName构建QQLoginReqBody对象，调用CUGEAndroidSDK.authentication.qqLogin(qqLoginReqBody)发起qq登录请求。
+   （3）qq登录点击事件的绑定：调用CUGEAndroidSDK.authentication.qqLogin方法，参数传入QQLoginActivity上下文，注意在协程作用域里调用此suspend方法。
    
    * 代码示例：
    
@@ -486,47 +494,26 @@ https://github.com/CUGE-Dev/cuge-android-demo
    class LoginActivity : QQLoginActivity() {
    
        private lateinit var qqAuth: QQAuth
-       private lateinit var loginCbListener: IUiListener
    
        override fun onCreate(savedInstanceState: Bundle?) {
            super.onCreate(savedInstanceState)
            setContentView(R.layout.activity_login)
            qqAuth = QQAuth(applicationContext)
+           bindComponents()
+       }
+   
+       private fun bindComponents() {
            login_qq_login.setOnClickListener {
                if (!qqAuth.isHaveInstallQQ(CUGEAndroidDemoApplication.context)) {
                    "当前设备未安装QQ，请先安装完再登陆！".showToast()
                } else {
-                   qqAuth.loginQQ(this@LoginActivity)
-               }
-           }
-       }
-   
-       override fun setLoginCallbackListener(listener: IUiListener) {
-           loginCbListener = listener
-       }
-   
-       override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-           super.onActivityResult(requestCode, resultCode, data)
-           Tencent.onActivityResultData(requestCode, resultCode, data, loginCbListener)
-           // 注意，涉及到while循环，不要在主线程执行
-           CUGEAndroidDemoApplication.scope.launch(Dispatchers.Default) {
-    		// while循环主要是确保openID、accessToken、expires和nickName不为空
-               while (true) {
-                   if (qqAuth.timer == 1)
-                       break
-               }
-               val qqLoginReqBody = QQLoginReqBody(
-                   qqAuth.openID,
-                   qqAuth.accessToken,
-                   qqAuth.expires.toLong(),
-                   qqAuth.nickName
-               )
-               when (CUGEAndroidSDK.authentication.qqLogin(qqLoginReqBody)) {
-                   0 -> {
-                       "qq登录成功".showToast()
-                   }
-                   else -> {
-                       "qq登录失败".showToast()
+                   CUGEAndroidDemoApplication.scope.launch {
+                       val result = CUGEAndroidSDK.authentication.qqLogin(this@LoginActivity)
+                       if (result == 0) {
+                         	"登录成功".showToast()
+                       } else {
+                           "登录失败".showToast()
+                       }
                    }
                }
            }

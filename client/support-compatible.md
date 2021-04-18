@@ -31,4 +31,3 @@ implementation('com.zzm.android_basic_library:cuge_android_sdk:1.0.16-support-SN
 > ```
 >
 > 否则，您可能需要手动排掉SDK中的Kotlin依赖，且承担SDK可能存在的不稳定风险。
-
