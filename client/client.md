@@ -484,38 +484,29 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    （1）LoginActivity需要继承sdk提供的 QQLoginActivity()。
 
-   （2）onCreate()函数初始化QQAuth对象。
+   （2）qq登录点击事件的绑定：调用CUGEAndroidSDK.authentication.qqLogin方法，参数传入QQLoginActivity上下文，注意在协程作用域里调用此suspend方法。
 
-   （3）qq登录点击事件的绑定：调用CUGEAndroidSDK.authentication.qqLogin方法，参数传入QQLoginActivity上下文，注意在协程作用域里调用此suspend方法。
-   
    * 代码示例：
    
    ```
    class LoginActivity : QQLoginActivity() {
    
-       private lateinit var qqAuth: QQAuth
-   
        override fun onCreate(savedInstanceState: Bundle?) {
            super.onCreate(savedInstanceState)
            setContentView(R.layout.activity_login)
-           qqAuth = QQAuth(applicationContext)
            bindComponents()
        }
    
        private fun bindComponents() {
            login_qq_login.setOnClickListener {
-               if (!qqAuth.isHaveInstallQQ(CUGEAndroidDemoApplication.context)) {
-                   "当前设备未安装QQ，请先安装完再登陆！".showToast()
-               } else {
-                   CUGEAndroidDemoApplication.scope.launch {
-                       val result = CUGEAndroidSDK.authentication.qqLogin(this@LoginActivity)
-                       if (result == 0) {
-                         	"登录成功".showToast()
-                       } else {
-                           "登录失败".showToast()
-                       }
-                   }
-               }
+                 CUGEAndroidDemoApplication.scope.launch {
+                     val result = CUGEAndroidSDK.authentication.qqLogin(this@LoginActivity)
+                     if (result == 0) {
+                        "登录成功".showToast()
+                     } else {
+                         "登录失败".showToast()
+                     }
+                 }
            }
        }
    }
