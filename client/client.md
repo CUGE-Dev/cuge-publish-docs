@@ -88,7 +88,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
    
        override fun onCreate() {
            super.onCreate()
-           scope.launch {
+           scope.launch(Dispatchers.Main.immediate) {
                CUGEAndroidSDK.init(
                    applicationContext, 1,
                    CryptoUtil.loadPubKeyFromImage(applicationContext, R.raw.test_bizline), "test_bizline"
@@ -336,12 +336,12 @@ https://github.com/CUGE-Dev/cuge-android-demo
    * 使用方式：
 
    ```kotlin
-   if (CommonUtil.getSp(this).getInt("type", -1) != -1 && !CommonUtil.isNeedInitSDK(this)) {
+   if (CUGEAndroidSDK.authentication.isLoginStateExist()) {
           startMainActivity()//免登陆直接进入主界面
     }    
    ```
 
-   * 使用说明：调用CommonUtil.getSp(context:Context).getInt("type", -1) != -1 && !CommonUtil.isNeedInitSDK(context:Context),若为true，说明登录态存在，可直接免登陆进入主界面。
+   * 使用说明：调用CUGEAndroidSDK.authentication.isLoginStateExist(),若为true，说明登录态存在，可直接免登陆进入主界面。
 
      
 
