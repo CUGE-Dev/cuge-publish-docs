@@ -1,4 +1,4 @@
-## CUGE Android SDK 开发者文档
+# CUGE Android SDK 开发者文档
 
 *注意，开发者在使用以下文档前，需先在CUGE管理后台申请建立业务线和应用ID*。
 
@@ -40,7 +40,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
 
 
-#### 一、项目配置
+## 一、项目配置
 
 1. 在project下的build.gradle里引入如下三行依赖：
 
@@ -118,7 +118,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
    
 
-#### 二 、接口说明（SDK中网络请求用协程和Retrofit实现，故调用接口函数时需要在协程作用域里调用）
+## 二 、接口说明（SDK中网络请求用协程和Retrofit实现，故调用接口函数时需要在协程作用域里调用）
 
 1. 登录注册
 
@@ -470,7 +470,7 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
 
 
-#### 三、可插拔的QQ登录模块
+## 三、可插拔的QQ登录模块
 
 1. 模块build.gradle中引入依赖：
 
