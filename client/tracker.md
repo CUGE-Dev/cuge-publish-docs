@@ -14,7 +14,7 @@
 
 ## 埋点曝光规则
 
-![](C:\Users\Dawn\Desktop\SHARE\毕业设计\埋点系统设计.assets\spm-guide.png)
+![](tracker.assets/spm-guide.png)
 
 **tp参数语义**
 
@@ -43,7 +43,7 @@ tp参数有三种形式，tp.a.b.c.d，tp.a.b.c，tp.a.b。下表描述了三种
 
 ## 框架结构设计
 
-![](C:\Users\Dawn\Desktop\SHARE\毕业设计\埋点系统设计.assets\spm-framework.png)
+![](tracker.assets/spm-framework.png)
 
 ## 日志格式设计
 
