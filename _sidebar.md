@@ -1,10 +1,10 @@
 - Notification
-  - [文档编写规范](./workflow.md)
+  - [文档编写规范](/workflow.md)
 - 服务端
-  - [环境部署](./server/deploy.md)
-  - [业务接入指南](./server/biz-intergration.md)
-  - [短信转发服务](./server/messenger.md)
+  - [环境部署](/server/deploy.md)
+  - [业务接入指南](/server/biz-intergration.md)
+  - [短信转发服务](/server/messenger.md)
 - 客户端
-  - [业务接入指南](./client/cuge-android-sdk.md)
-  - [埋点说明文档](./client/tracker.md)
-  - [兼容仍在使用support库的过时应用](./client/support-compatible.md)
+  - [业务接入指南](/client/cuge-android-sdk.md)
+  - [埋点说明文档](/client/tracker.md)
+  - [兼容仍在使用support库的过时应用](/client/support-compatible.md)
