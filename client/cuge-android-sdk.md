@@ -44,8 +44,8 @@ https://github.com/CUGE-Dev/cuge-android-demo
 
 1. 在project下的build.gradle里引入如下三行依赖：
 
-   maven { url 'http://47.107.119.93:8090/repository/maven-snapshots/'}
-   maven { url 'http://47.107.119.93:8090/repository/maven-public/' }
+   maven { url 'http://159.75.8.205:8090/repository/maven-snapshots/'}
+   maven { url 'http://159.75.8.205:8090/repository/maven-public/' }
    maven { url "https://jitpack.io" }
 
    ```groovy
@@ -53,8 +53,8 @@ https://github.com/CUGE-Dev/cuge-android-demo
        repositories {
            google()
            jcenter()
-           maven { url 'http://47.107.119.93:8090/repository/maven-snapshots/'}
-           maven { url 'http://47.107.119.93:8090/repository/maven-public/' }
+           maven { url 'http://159.75.8.205:8090/repository/maven-snapshots/'}
+           maven { url 'http://159.75.8.205:8090/repository/maven-public/' }
            maven { url "https://jitpack.io" }
        }
    }
@@ -62,8 +62,8 @@ https://github.com/CUGE-Dev/cuge-android-demo
        repositories {
            google()
            jcenter()
-           maven { url 'http://47.107.119.93:8090/repository/maven-snapshots/'}
-           maven { url 'http://47.107.119.93:8090/repository/maven-public/' }
+           maven { url 'http://159.75.8.205:8090/repository/maven-snapshots/'}
+           maven { url 'http://159.75.8.205:8090/repository/maven-public/' }
            maven { url "https://jitpack.io" }
        }
    }

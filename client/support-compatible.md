@@ -14,7 +14,7 @@ implementation('com.zzm.android_basic_library:cuge_android_sdk:1.0.16-support-SN
 }
 ```
 
-> 最新版本请以 [Maven仓库](http://47.107.119.93:8090/#browse/search=keyword%3Dcuge_android_sdk) 为准，注意版本号应带有support字样。
+> 最新版本请以 [Maven仓库](http://159.75.8.205:8090/#browse/search=keyword%3Dcuge_android_sdk) 为准，注意版本号应带有support字样。
 >
 > 如果您的项目中使用了Kotlin标准库，或者是Kotlin协程，请确保它们的版本不高于如下所示:
 >

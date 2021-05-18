@@ -6,7 +6,7 @@
 
 ## 1. 引入业务二方包
 
-> 版本请以Maven上 [cuge-client-core](http://47.107.119.93:8090/#browse/search=keyword%3Dcuge-client-core%20AND%20name.raw%3Dcuge-client-core) 最新版本为准。
+> 版本请以Maven上 [cuge-client-core](http://159.75.8.205:8090/#browse/search=keyword%3Dcuge-client-core%20AND%20name.raw%3Dcuge-client-core) 最新版本为准。
 
 ```xml
 <dependency>
@@ -23,7 +23,7 @@
         <repository>
             <id>maven-public</id>
             <name>maven-public</name>
-            <url>http://47.107.119.93:8090/repository/maven-public/</url>
+            <url>http://159.75.8.205:8090/repository/maven-public/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
