@@ -26,9 +26,8 @@ services:
     ports:
       - "13306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: mysql-root-password
-    volumes:
-      - /your/path/to/physical/volume:/var/lib/mysql
+      - MYSQL_ROOT_PASSWORD=your_mysql_root_password
+      - TZ=Asia/Shanghail
 
   redis:
     image: redis:6.0.9
