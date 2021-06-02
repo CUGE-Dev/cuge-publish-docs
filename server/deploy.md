@@ -27,7 +27,9 @@ services:
       - "13306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=your_mysql_root_password
-      - TZ=Asia/Shanghail
+      - TZ=Asia/Shanghai
+    volumes:
+      - /path/to/data/mysql:/var/lib/mysql
 
   redis:
     image: redis:6.0.9
